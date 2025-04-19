@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import AppBar from "../components/AppBar";
 import { styles } from "../styles/calculatorStyles";
 
@@ -13,32 +13,33 @@ export default function CalculatorScreen () {
     };
 
     const buttons = [
-        "AC", "C", "/", "*",
-        "7", "8", "9", "-",
-        "4", "5", "6", "+",
-        "1", "2", "3", "=",
-        "0", "."
+        "AC", "C", "%", "/",
+        "7", "8", "9", "*",
+        "4", "5", "6", "-",
+        "1", "2", "3", "+",
+        " ", "0", ".", "="
     ];
 
     return (
         <SafeAreaView style={styles.container}>
             <AppBar title="Calculator" />
             
-            <View style={styles.display}>
-                <Text style={styles.expression}>{expression}</Text>
-                <Text style={styles.result}>{result}</Text>
+            <View style={[styles.display, styles.displayTextContainer]}>
+                <Text style={styles.expression}>{expression || '0'}</Text>
+                <Text style={styles.result}>{result || '0'}</Text>
             </View>
-            
+            <View style={styles.buttonsSection}>
             <View style={styles.buttonContainer}>
                 {buttons.map((button, index) => (
-                    <View key={index}
-                    style={styles.buttonWrapper}>
-                        <Button 
-                        title={button}
-                        onPress={() => handlePress(button)}
-                        />
-                    </View>
+                    <TouchableOpacity
+                    key={index}
+                    style={styles.buttonWrapper}
+                    onPress={() => handlePress(button)}
+                    >
+                        <Text style={styles.buttonText}>{button}</Text>
+                    </TouchableOpacity>
                 ))}
+                </View>
             </View>
         </SafeAreaView>
     );
