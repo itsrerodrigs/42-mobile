@@ -24,7 +24,7 @@ export default function CalculatorScreen () {
     return (
         <SafeAreaView style={styles.container}>
             <AppBar title="Calculator" />
-            <View style={[styles.containerPai, width < height ? {flexDirection:'column'} : {flexDirection:'row'}]}>
+            <View style={[styles.containerCalculator, width < height ? {flexDirection:'column'} : {flexDirection:'row'}]}>
             <View style={[styles.display, styles.displayTextContainer]}>
                 <Text style={styles.expression}>{expression || '0'}</Text>
                 <Text style={styles.result}>{result || '0'}</Text>
