@@ -3,10 +3,11 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-between',
-        alignItems: 'center',
         padding: 16,
         backgroundColor: '#FBF2ED',
+    },
+    containerPai: {
+        flex: 1,
     },
     display: {
         flex: 1,
@@ -18,13 +19,7 @@ export const styles = StyleSheet.create({
     displayTextContainer: {
         alignItems: 'flex-end',
         width: '100%',
-        justifyContent: 'flex-end',
-    },
-    displayLandscape: {
-        paddingBottom: 8,
-        paddingTop: 0,
-        justifyContent: 'flex-end',
-        width: '100%',  
+        justifyContent: 'flex-end',  
     },
     expression: {
         fontSize: 32,
@@ -43,16 +38,12 @@ export const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#CDD5C6',
     },
-    appBar:{
+    appBar: {
         width: '100%',
         height: 60,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 4,
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        zIndex: 10,
         backgroundColor: '#CDD5C6',
     },
     titleAppBar: {
@@ -60,25 +51,18 @@ export const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-    buttonsSection: {
-        width: '100%',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
     buttonContainer: {
-        width: '80%',
+        flex: 2,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        marginTop: 20,
-        marginBottom: 20,
+        paddingVertical: 12,
+        justifyContent: 'center',
+        gap: 4,
     },
     buttonWrapper:{
         width: '22%',
-        height: 70,
-        aspectRatio: 1,
-        marginVertical: 8,
-        borderRadius: 35,
+        height: '20%',
+        borderRadius: 102,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#CDD5C6',

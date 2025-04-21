@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity, useWindowDimensions } from "react-native";
 import AppBar from "../components/AppBar";
 import { styles } from "../styles/calculatorStyles";
 
 export default function CalculatorScreen () {
     const [expression, setExpression] = useState("");
     const [result, setResult] = useState("");
+    const { width, height } = useWindowDimensions();
 
     const handlePress = (label) => {
         console.log("Click on", label);
@@ -23,12 +24,11 @@ export default function CalculatorScreen () {
     return (
         <SafeAreaView style={styles.container}>
             <AppBar title="Calculator" />
-            
+            <View style={[styles.containerPai, width < height ? {flexDirection:'column'} : {flexDirection:'row'}]}>
             <View style={[styles.display, styles.displayTextContainer]}>
                 <Text style={styles.expression}>{expression || '0'}</Text>
                 <Text style={styles.result}>{result || '0'}</Text>
             </View>
-            <View style={styles.buttonsSection}>
             <View style={styles.buttonContainer}>
                 {buttons.map((button, index) => (
                     <TouchableOpacity
