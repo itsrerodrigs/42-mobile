@@ -1,22 +1,45 @@
-import react from "react";
-import { View, Text, Button } from "react-native-web";
+import React from "react";
+import { View, Button, StyleSheet } from "react-native";
+import { useSignIn } from "@clerk/clerk-expo";
+import * as WebBrowser from 'expo-web-browser';
+import { useWarmUpBrowser } from '../utils/useWarmUpBrowser';
 
-const LoginScreen = ({ navigation }) => {
-    const handleGoogleLogin = () => {
-        console.log('Login com Google iniciado!');
-    };
+WebBrowser.maybeCompleteAuthSession();
 
-    const handlerGitHubLogin = () => {
-        console.log('Login com GitHub iniciado!');
+export default function LoginScreen() {
+    useWarmUpBrowser();
+
+    const { signIn, setActive } = useSignIn();
+
+    const handleOAuthSignIn = async (provider) => {
+        try {
+            const { createdSessionId } = await signIn?.authenticateWithRedirect({
+                strategy: `oauth_${provider}`,
+                redirectUrl: 'diary_app://redirect',
+            });
+
+            if (createdSessionId) {
+                await setActive({ session : createdSessionId});
+            }
+        } catch (err) {
+            console.error(`Erro no login com ${provider}:`, err);
+        }
     };
 
     return (
-        <View style={styles.loginContainer}>
-            <Text style={styles.titleLogin}>welcome to your diary!</Text>
-            <Button title="Login com Google" onPress={handleGoogleLogin} />
-            <Button title="Login com GitHub" onPress={handlerGitHubLogin} />
+        <View style={styles.loginScreenContainer}>
+            <Button title="Entrar com Google" onPress={() => handleOAuthSignIn('google')} />
+            <View style={{ height: 20}} />
+            <Button title="Entrar com GitHub" onPress={() => handleOAuthSignIn('github')} /> 
         </View>
     );
-};
+}
 
-export default LoginScreen;
+const styles = StyleSheet.create({
+    loginScreenContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+    },
+});
