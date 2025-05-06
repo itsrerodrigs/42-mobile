@@ -1,13 +1,18 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../styles/weatherAppStyles';
 
 const BottomButtons = ({ activeIndex, onPress}) => {
-    const buttons = ['Currently', 'Today', 'Weekly'];
+    const buttons = [
+        {'label': 'Currently', icon: 'sunny' },
+        {'label': 'Today', icon: 'calendar-outline' },
+        {'label': 'Weekly', icon: 'calendar' }
+    ]; 
 
     return (
         <View style={styles.bottomContainer}>
-            {buttons.map((label, index) => (
+            {buttons.map((btn, index) => (
                 <TouchableOpacity
                 key={index}
                 style={[
@@ -16,11 +21,17 @@ const BottomButtons = ({ activeIndex, onPress}) => {
                 ]}
                 onPress={() => onPress(index)}
                 >
+                    <Ionicons
+                    name={btn.icon}
+                    size={20}
+                    color={activeIndex === index ? '#000' : '#333'}
+                    style={{ marginBottom: 4 }}
+                    />
                 <Text style ={[
                     styles.buttonText,
                     activeIndex === index && styles.activeButtonText
                 ]}>
-                    {label}
+                    {btn.label}
                 </Text>
                 </TouchableOpacity>
             ))}
